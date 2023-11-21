@@ -10,7 +10,7 @@ const Analysis = ({status}: any) => {
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell style={{color: 'white'}}>Status:</TableCell>
+							<TableCell style={{color: "white"}}>Status:</TableCell>
 							<TableCell style={{fontWeight: 900}} align="center">{String(status)}</TableCell>
 						</TableRow>
 					</TableHead>

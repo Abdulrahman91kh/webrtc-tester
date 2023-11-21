@@ -8,9 +8,9 @@ const NotFound404 = () => {
 		>
 			<Card>
 				Sorry, this path is not found.
-				</Card>
+			</Card>
 		</Wrapper>
-	)
+	);
 };
 
 export default NotFound404;

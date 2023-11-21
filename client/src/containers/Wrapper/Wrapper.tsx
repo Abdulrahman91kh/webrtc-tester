@@ -1,6 +1,6 @@
 import Divider from "../../components/Divider/Divider";
 import { WrapperPropsType } from "../../types/ComponentsProps.types";
-import Styles from './Wrapper.module.css';
+import Styles from "./Wrapper.module.css";
 
 const Wrapper = ({title, children}: WrapperPropsType) => {
 	return (
@@ -13,7 +13,7 @@ const Wrapper = ({title, children}: WrapperPropsType) => {
 				{children}
 			</section>
 		</div>
-	)
+	);
 };
 
 export default Wrapper;
