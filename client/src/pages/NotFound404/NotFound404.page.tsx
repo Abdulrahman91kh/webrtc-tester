@@ -1,3 +1,4 @@
+import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import Wrapper from "../../containers/Wrapper/Wrapper";
 
@@ -7,7 +8,10 @@ const NotFound404 = () => {
 			title="404 Page Not Found"
 		>
 			<Card>
-				Sorry, this path is not found.
+				<div className="alignCenter">
+					Sorry, this path is not found.
+					<Button title="Back Home" />
+				</div>
 			</Card>
 		</Wrapper>
 	);

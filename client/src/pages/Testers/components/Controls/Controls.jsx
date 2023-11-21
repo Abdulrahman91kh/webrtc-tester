@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Card from "../../../../components/Card/Card";
 import SectionTitle from "../../../../components/SectionTitle/SecrtionTitle";
 
-const cameras = ['camera1', 'camera2', 'camera3']
+const cameras = ["camera1", "camera2", "camera3"];
 
 const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
 	return (
@@ -19,8 +19,8 @@ const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
 							label="Camera Selector"
 							onChange={changeSelectedCamera}
 						>
-							{cameras.map(c => (
-								<MenuItem value={c}>{c}</MenuItem>
+							{cameras.map((c, i) => (
+								<MenuItem key={`${c}-${i}`} value={c}>{c}</MenuItem>
 							))}
 						</Select>
 					</FormControl>
