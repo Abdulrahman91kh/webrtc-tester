@@ -6,7 +6,7 @@ const Preview = () => {
 			stream={new MediaStream()}
 			muted={true}
 		/>
-	)
+	);
 };
 
 export default Preview;

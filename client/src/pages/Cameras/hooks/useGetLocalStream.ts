@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default  () => {
+const useGetLocalStream = () => {
 	const [localStream, setLocalStream] = useState<MediaStream>();
 
 	useEffect(() => {
@@ -19,9 +19,11 @@ export default  () => {
 			
 		}
 		)();
-	}, [])
+	}, []);
 
 	return {
 		localStream
-	}
+	};
 };
+
+export default useGetLocalStream;

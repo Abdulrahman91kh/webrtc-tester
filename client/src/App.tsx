@@ -1,8 +1,8 @@
-import './App.css';
+import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CamerasPage from './pages/Cameras/Cameras.page';
-import TestersPage from './pages/Testers/Tester.page';
-import NotFound404 from './pages/NotFound404/NotFound404.page';
+import CamerasPage from "./pages/Cameras/Cameras.page";
+import TestersPage from "./pages/Testers/Tester.page";
+import NotFound404 from "./pages/NotFound404/NotFound404.page";
 
 function App() {
 	return (

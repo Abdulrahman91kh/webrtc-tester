@@ -3,16 +3,16 @@ import Wrapper from "../../containers/Wrapper/Wrapper";
 import ControlsSection from "./components/Controls/Controls";
 import Preview from "./components/Preview/Preview";
 import Results from "./components/Results/Results";
-import Styles from './Tester.module.css';
+import Styles from "./Tester.module.css";
 import { SelectChangeEvent } from "@mui/material";
 import Analysis from "./components/Analysis/Analysis";
 import { WebRTCStatus } from "../../types/Tester.type";
 
 const TestersPage = () => {
 
-	const [selectedCamera, setSelectedCamera] = useState<string>('');
-	const [resultRoute, setResultRoute] = useState<string>('NA');
-	const [status, setStatus] = useState<WebRTCStatus>(WebRTCStatus.NOT_CONNECTED)
+	const [selectedCamera, setSelectedCamera] = useState<string>("");
+	const [resultRoute, setResultRoute] = useState<string>("NA");
+	const [status, setStatus] = useState<WebRTCStatus>(WebRTCStatus.NOT_CONNECTED);
 
 
 	const handleChangeSelectedCamera = (event: SelectChangeEvent) => {
@@ -39,7 +39,7 @@ const TestersPage = () => {
 				status={status}
 			/>
 		</Wrapper>
-	)
+	);
 };
 
 export default TestersPage;

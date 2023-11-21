@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 import { VideoPlayerProps } from "../../types/ComponentsProps.types";
-import Styles from './VideoPlayer.module.css';
+import Styles from "./VideoPlayer.module.css";
 
 const VideoPlayer = ({stream, muted}: VideoPlayerProps) => {
 
