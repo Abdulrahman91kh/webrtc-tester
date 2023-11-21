@@ -7,3 +7,6 @@ body {
 .container {
 	padding: 10px;
 }
+.alignCenter {
+	text-align: center;
+}
