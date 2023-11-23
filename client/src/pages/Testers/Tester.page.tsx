@@ -11,6 +11,7 @@ import { WebRTCStatus } from "../../types/Tester.type";
 const TestersPage = () => {
 
 	const [selectedCamera, setSelectedCamera] = useState<string>("");
+	const [addRemoteStream, setAddRemoteStream] = useState<boolean>(false);
 	const [resultRoute, setResultRoute] = useState<string>("NA");
 	const [status, setStatus] = useState<WebRTCStatus>(WebRTCStatus.NOT_CONNECTED);
 
@@ -28,6 +29,8 @@ const TestersPage = () => {
 					<ControlsSection
 						selectedCamera={selectedCamera}
 						changeSelectedCamera={handleChangeSelectedCamera}
+						addRemoteStream={addRemoteStream}
+						setAddRemoteStream={setAddRemoteStream}
 					/>
 					<Results route={resultRoute} />
 				</div>

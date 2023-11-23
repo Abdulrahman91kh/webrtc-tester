@@ -1,10 +1,18 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select } from "@mui/material";
 import Card from "../../../../components/Card/Card";
 import SectionTitle from "../../../../components/SectionTitle/SecrtionTitle";
 
 const cameras = ["camera1", "camera2", "camera3"];
 
-const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
+const ControlsSection = ({
+	selectedCamera,
+	changeSelectedCamera,
+	addRemoteStream,
+	setAddRemoteStream
+}) => {
+	const handleChange = (event) => {
+		setAddRemoteStream(!addRemoteStream);
+	};
 	return (
 		<>
 			<SectionTitle title="Settings" />
@@ -24,6 +32,12 @@ const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
 							))}
 						</Select>
 					</FormControl>
+					<FormControlLabel 
+						control={
+							<Checkbox checked={addRemoteStream} onChange={handleChange} />
+						}
+						label="Label"
+					/>
 				</Card>
 			</section>
 		</>

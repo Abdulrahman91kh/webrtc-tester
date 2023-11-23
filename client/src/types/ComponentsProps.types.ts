@@ -31,3 +31,8 @@ export interface SectionTitlePropsType {
 export interface AnalysisPropsType {
 	status: WebRTCStatus;
 }
+
+export interface ButtonPropsType {
+	title: string;
+	onClick: () => void;
+}
