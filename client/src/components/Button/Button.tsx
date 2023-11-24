@@ -1,4 +1,5 @@
-import { ButtonPropsType } from "../../types/ComponentsProps.types";
+import { NavLink } from "react-router-dom";
+import { ButtonPropsType } from "../../types/ComponentsProps.type";
 import Styles from "./Button.module.css";
 
 const Button = ({title, onClick}: ButtonPropsType) => {

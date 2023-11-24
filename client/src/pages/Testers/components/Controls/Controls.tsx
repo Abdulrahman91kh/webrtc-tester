@@ -1,18 +1,17 @@
-import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Card from "../../../../components/Card/Card";
 import SectionTitle from "../../../../components/SectionTitle/SecrtionTitle";
+import Button from "../../../../components/Button/Button";
+import { ControlsSectionPropsType } from "../../../../types/ComponentsProps.type";
 
-const cameras = ["camera1", "camera2", "camera3"];
 
 const ControlsSection = ({
+	cameraOptions,
 	selectedCamera,
 	changeSelectedCamera,
-	addRemoteStream,
-	setAddRemoteStream
-}) => {
-	const handleChange = (event) => {
-		setAddRemoteStream(!addRemoteStream);
-	};
+	connectToCamera
+}: ControlsSectionPropsType) => {
+	console.log(cameraOptions);
 	return (
 		<>
 			<SectionTitle title="Settings" />
@@ -27,16 +26,15 @@ const ControlsSection = ({
 							label="Camera Selector"
 							onChange={changeSelectedCamera}
 						>
-							{cameras.map((c, i) => (
+							{cameraOptions.map((c, i) => (
 								<MenuItem key={`${c}-${i}`} value={c}>{c}</MenuItem>
 							))}
 						</Select>
 					</FormControl>
-					<FormControlLabel 
-						control={
-							<Checkbox checked={addRemoteStream} onChange={handleChange} />
-						}
-						label="Label"
+					
+					<Button 
+						title="Connect"
+						onClick={connectToCamera}
 					/>
 				</Card>
 			</section>

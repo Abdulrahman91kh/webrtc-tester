@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Wrapper from "../../containers/Wrapper/Wrapper";
 import ControlsSection from "./components/Controls/Controls";
 import Preview from "./components/Preview/Preview";
@@ -6,14 +6,45 @@ import Results from "./components/Results/Results";
 import Styles from "./Tester.module.css";
 import { SelectChangeEvent } from "@mui/material";
 import Analysis from "./components/Analysis/Analysis";
+import socket from "../../config/Sockets/Sockets";
+import { EVENTS } from "../../types/Sockets.type";
+import usePeerConnection from "../hooks/usePeerConnection";
+import SimplePeer from "simple-peer";
 import { WebRTCStatus } from "../../types/Tester.type";
 
 const TestersPage = () => {
 
 	const [selectedCamera, setSelectedCamera] = useState<string>("");
-	const [addRemoteStream, setAddRemoteStream] = useState<boolean>(false);
-	const [resultRoute, setResultRoute] = useState<string>("NA");
-	const [status, setStatus] = useState<WebRTCStatus>(WebRTCStatus.NOT_CONNECTED);
+	const [cameraOptions, setCameraOptions] = useState<string[]>([]);
+
+	const {
+		connectPeer,
+		remoteStream,
+		candidates,
+		applySignal,
+		status,
+		resultRoute
+	} = usePeerConnection(selectedCamera);
+
+	const connectToCamera = () => {
+		connectPeer({initiator: true});
+	};
+
+	useEffect(() => {
+		
+		const getCameraOptions = (cameras: string[]) => setCameraOptions(cameras);
+		socket.emit(EVENTS.GET_CAMERAS_REQ);
+		if(socket.listeners(EVENTS.GET_CAMERAS_RES).length){
+			socket.removeAllListeners(EVENTS.GET_CAMERAS_RES);
+		}
+		socket.on(EVENTS.GET_CAMERAS_RES, getCameraOptions);
+
+		const applyAnswer = (signal: SimplePeer.SignalData) => applySignal(signal);
+		if(socket.listeners(EVENTS.ANSWER_CONNECTION).length){
+			socket.removeAllListeners(EVENTS.ANSWER_CONNECTION);
+		}
+		socket.on(EVENTS.ANSWER_CONNECTION, applyAnswer);
+	}, []);
 
 
 	const handleChangeSelectedCamera = (event: SelectChangeEvent) => {
@@ -27,19 +58,22 @@ const TestersPage = () => {
 			<div className={Styles.mainContent}>
 				<div className={Styles.leftSide}>
 					<ControlsSection
+						cameraOptions={cameraOptions}
 						selectedCamera={selectedCamera}
 						changeSelectedCamera={handleChangeSelectedCamera}
-						addRemoteStream={addRemoteStream}
-						setAddRemoteStream={setAddRemoteStream}
+						connectToCamera={connectToCamera}
 					/>
 					<Results route={resultRoute} />
 				</div>
 				<div className={Styles.rightSide}>
-					<Preview />
+					<Preview 
+						stream={remoteStream}
+					/>
 				</div>
 			</div>
 			<Analysis 
-				status={status}
+				status={status as WebRTCStatus}
+				candidates={candidates}
 			/>
 		</Wrapper>
 	);

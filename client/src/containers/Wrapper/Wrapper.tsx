@@ -1,5 +1,5 @@
 import Divider from "../../components/Divider/Divider";
-import { WrapperPropsType } from "../../types/ComponentsProps.types";
+import { WrapperPropsType } from "../../types/ComponentsProps.type";
 import Styles from "./Wrapper.module.css";
 
 const Wrapper = ({title, children}: WrapperPropsType) => {

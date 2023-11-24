@@ -3,6 +3,10 @@ export interface CamerasDataType {
 	password: string;
 	socketId: string;
 };
+export interface CamerasIncomingDataType {
+	name: string;
+	password: string;
+};
 
 export interface CameraDataTesterType {
 	name: string;
