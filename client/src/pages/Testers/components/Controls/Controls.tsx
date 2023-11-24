@@ -1,10 +1,17 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Card from "../../../../components/Card/Card";
 import SectionTitle from "../../../../components/SectionTitle/SecrtionTitle";
+import Button from "../../../../components/Button/Button";
+import { ControlsSectionPropsType } from "../../../../types/ComponentsProps.type";
 
-const cameras = ["camera1", "camera2", "camera3"];
 
-const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
+const ControlsSection = ({
+	cameraOptions,
+	selectedCamera,
+	changeSelectedCamera,
+	connectToCamera
+}: ControlsSectionPropsType) => {
+	console.log(cameraOptions);
 	return (
 		<>
 			<SectionTitle title="Settings" />
@@ -19,11 +26,16 @@ const ControlsSection = ({selectedCamera, changeSelectedCamera}) => {
 							label="Camera Selector"
 							onChange={changeSelectedCamera}
 						>
-							{cameras.map((c, i) => (
+							{cameraOptions.map((c, i) => (
 								<MenuItem key={`${c}-${i}`} value={c}>{c}</MenuItem>
 							))}
 						</Select>
 					</FormControl>
+					
+					<Button 
+						title="Connect"
+						onClick={connectToCamera}
+					/>
 				</Card>
 			</section>
 		</>

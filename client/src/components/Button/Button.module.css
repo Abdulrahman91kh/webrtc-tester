@@ -4,6 +4,10 @@
 	padding: 10px;
 	border-radius: 5px;
 	display: inline-block;
-	border-bottom: 1px solid #cccccc38;
+	border: 1px solid #cccccc38;
 	margin-left: 5px;
+	cursor: pointer;
+}
+.button:active {
+	border: 1px solid #cccccc88;
 }

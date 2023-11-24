@@ -1,5 +1,5 @@
 import Styles from "./SectionTitle.module.css";
-import { SectionTitlePropsType } from "../../types/ComponentsProps.types";
+import { SectionTitlePropsType } from "../../types/ComponentsProps.type";
 
 const SectionTitle = ({title}: SectionTitlePropsType) => {
 	return (

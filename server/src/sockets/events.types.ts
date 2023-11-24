@@ -1,5 +1,5 @@
 import { SignalData } from "simple-peer";
-import { CameraDataTesterType, CamerasDataType } from "../types/camera.types";
+import { CameraDataTesterType, CamerasIncomingDataType } from "../types/camera.types";
 
 export enum EVENTS {
 	NEW_CONNECTION = 'NEW_CONNECTION',
@@ -11,8 +11,8 @@ export enum EVENTS {
 
 export interface ListenEvents {
 	OFFER_CONNECTION: (data: OfferConnectionType) => void;
-	ANSWER_CONNECTION: (signal: SignalData) => void;
-	NEW_CONNECTION: (data: CamerasDataType) => void;
+	ANSWER_CONNECTION: ({signal, testerId}) => void;
+	NEW_CONNECTION: (data: CamerasIncomingDataType) => void;
 	GET_CAMERAS_REQ: () => void;
 }
 
@@ -24,6 +24,6 @@ interface OfferConnectionType {
 
 export interface EmitEvents {
 	OFFER_CONNECTION: (data: OfferConnectionType) => void;
-	ANSWER_CONNECTION: (data: OfferConnectionType) => void;
+	ANSWER_CONNECTION: (signal: OfferConnectionType) => void;
 	GET_CAMERAS_RES: (cameras: CameraDataTesterType[]) => void;
 }
