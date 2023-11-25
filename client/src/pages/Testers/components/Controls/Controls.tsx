@@ -50,7 +50,6 @@ const ControlsSection = ({
 						value={camPassword}
 						onChange={handleChangePassword}
 					/>
-					{/* Here */}
 
 					<Tooltip title="Only For Testing Purposes">
 						<span>
