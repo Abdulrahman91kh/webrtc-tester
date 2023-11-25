@@ -2,9 +2,13 @@ import express from 'express';
 import DotEnv from 'dotenv';
 import connectSocket from './sockets';
 import redis from './config/redis';
+import path from 'path';
+import fs from 'fs/promises'
 
 DotEnv.config();
 const app = express();
+
+app.use("/", express.static(path.join(__dirname, "./public/")));
 
 app.get('/ping', (req, res) => {
 	res.status(200).json({
@@ -20,6 +24,10 @@ app.use((req, res) => {
 		message: "Path Not found",
 	});
 });
+
+// app.use((req, res, error) => {
+// 	console.log(error);
+// }); 
 
 redis.connect().catch(err => console.error('REDIS connection error', err));
 redis.DEL('cameras');

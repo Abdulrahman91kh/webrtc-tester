@@ -10,4 +10,5 @@ export interface CamerasIncomingDataType {
 
 export interface CameraDataTesterType {
 	name: string;
+	socketId: string
 }

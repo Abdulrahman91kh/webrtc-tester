@@ -1,25 +1,35 @@
 import { Socket } from "socket.io";
-import { EVENTS, EmitEvents, ListenEvents } from "./events.types";
-import { getAllCameras, getAllCamerasNames } from "../services/cameras";
-import { SocketServer } from "../types/sockets.types";
+import { getAllCamerasNames, getCameraByNamePassword } from "./services/cameras.services";
+import { EVENTS, EmitEvents, ListenEvents, SocketServer } from "../types/sockets.types";
+import { CameraDataTesterType } from "../types/camera.types";
+
+export const errorHandler = async (
+	socket: Socket<ListenEvents, EmitEvents>,
+	fn: () => Promise<CameraDataTesterType[] | CameraDataTesterType>
+) => {
+	try {
+		return await fn();
+	}
+	catch(err) {
+		socket.emit(EVENTS.ERROR_HAPPENED, String(err) );
+	}
+};
 
 const handleTesterEvents = (io: SocketServer, socket: Socket<ListenEvents, EmitEvents>) => {
 	
 	socket.on(EVENTS.GET_CAMERAS_REQ, async () => {
-		const cameras = await getAllCamerasNames();
-		io.to(socket.id).emit(EVENTS.GET_CAMERAS_RES, cameras);
+		const cameras = await  errorHandler(socket, getAllCamerasNames);
+		io.to(socket.id).emit(EVENTS.GET_CAMERAS_RES, cameras as CameraDataTesterType[]);
 	});
 
 	socket.on(EVENTS.OFFER_CONNECTION, async (data) => {
 		const { name, password } = data;
-		const cameras = await getAllCameras();
-		const camera = cameras.find(c => c.name === name);
-		if(password === camera.password) {
-			socket.emit(EVENTS.ERROR_HAPPENED, "Camera Authentication Failed!");
-			return;
-		}
-		// Establish secure connection using camera credentials
+		const camera = ( await errorHandler(
+			socket,
+			() => getCameraByNamePassword(name, password)
+		) ) as CameraDataTesterType;
 		io.to(camera?.socketId).emit(EVENTS.OFFER_CONNECTION, {...data, testerId: socket.id});
+		
 	});
 };
 export default handleTesterEvents  
