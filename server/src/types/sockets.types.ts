@@ -44,6 +44,4 @@ export interface ErrorHandlerArgsType {
 	fn: (data: any, data2: any) => void;
 	io: SocketServer;
 	socket: Socket<ListenEvents, EmitEvents>;
-	// event: EVENTS,
-	// payload: any;
 };
