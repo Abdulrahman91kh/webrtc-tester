@@ -16,6 +16,7 @@ const TestersPage = () => {
 
 	const [selectedCamera, setSelectedCamera] = useState<string>("");
 	const [cameraOptions, setCameraOptions] = useState<string[]>([]);
+	const [camPassword, setCamPassword] = useState<string>("");
 
 	const {
 		connectPeer,
@@ -23,11 +24,13 @@ const TestersPage = () => {
 		candidates,
 		applySignal,
 		status,
-		resultRoute
+		resultRoute,
+		selectedCandidates
 	} = usePeerConnection(selectedCamera);
 
 	const connectToCamera = () => {
-		connectPeer({initiator: true});
+		if(selectedCamera === "") return alert("Please select a camera to connect to...");
+		connectPeer({initiator: true, password: camPassword});
 	};
 
 	useEffect(() => {
@@ -51,6 +54,8 @@ const TestersPage = () => {
 		setSelectedCamera(event.target.value);
 	};
 
+	
+
 	return (
 		<Wrapper
 			title="Tester Page"
@@ -62,8 +67,9 @@ const TestersPage = () => {
 						selectedCamera={selectedCamera}
 						changeSelectedCamera={handleChangeSelectedCamera}
 						connectToCamera={connectToCamera}
+						camPassword={camPassword}
+						setCamPassword={setCamPassword}
 					/>
-					<Results route={resultRoute} />
 				</div>
 				<div className={Styles.rightSide}>
 					<Preview 
@@ -71,6 +77,10 @@ const TestersPage = () => {
 					/>
 				</div>
 			</div>
+			<Results
+				route={resultRoute}
+				selectedCandidates={selectedCandidates}
+			/>
 			<Analysis 
 				status={status as WebRTCStatus}
 				candidates={candidates}

@@ -3,13 +3,11 @@
 }
 .leftSide {
 	padding-top: 15px;
-	padding-bottom: 15px;
 	flex: 2;
 	padding-right: 15px;
 }
 .rightSide {
 	padding-top: 15px;
-	padding-bottom: 15px;
 	flex: 1;
 	text-align: center;
 }

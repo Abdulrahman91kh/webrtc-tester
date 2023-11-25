@@ -8,13 +8,14 @@ export enum EVENTS {
 	ANSWER_CONNECTION = "ANSWER_CONNECTION",
 	GET_CAMERAS_REQ = "GET_CAMERAS_REQ",
 	GET_CAMERAS_RES = "GET_CAMERAS_RES",
+	ERROR_HAPPENED = "ERROR_HAPPENED",
 }
-
 
 export interface ListenEvents {
 	OFFER_CONNECTION: (data: OfferConnectionListenType) => void;
 	GET_CAMERAS_RES: (cameras: string[]) => void;
 	ANSWER_CONNECTION: (signal: SignalData) => void;
+	ERROR_HAPPENED: (message: string) => void;
 }
 
 

@@ -18,7 +18,6 @@ const VideoPlayer = ({stream, muted}: VideoPlayerProps) => {
 			muted={muted}
 			playsInline
 			autoPlay
-			controls
 		/>
 	);
 };

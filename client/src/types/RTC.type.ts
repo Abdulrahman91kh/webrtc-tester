@@ -27,6 +27,7 @@ export enum CandidateGathering {
 export interface OfferConnectionEmitType {
 	name: string;
 	signal: SignalData;
+	password: string;
 }
 export interface OfferConnectionListenType {
 	name: string;
@@ -43,4 +44,5 @@ export interface ConnectPeerArgsType {
 	stream?: MediaStream;
 	testerId?: string;
 	offer?: SimplePeer.SignalData;
+	password?: string;
 }

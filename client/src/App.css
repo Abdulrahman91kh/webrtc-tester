@@ -10,3 +10,18 @@ body {
 .alignCenter {
 	text-align: center;
 }
+.MuiOutlinedInput-notchedOutline {
+	border-width: 1px !important;
+	border-color: #FFFFFF55 !important;
+	background-color: #FFFFFF11;
+}
+  
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border-color: #FFFFFFFF !important;
+}
+.MuiFormLabel-root {
+	color: #FFFFFF55 !important;
+}
+.MuiFormLabel-root.Mui-focused {
+	color: white!important;
+}
