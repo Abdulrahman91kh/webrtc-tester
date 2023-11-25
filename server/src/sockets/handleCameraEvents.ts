@@ -1,7 +1,6 @@
 import {Socket} from 'socket.io';
-import { EVENTS, EmitEvents, ListenEvents } from './events.types';
-import { SocketServer } from '../types/sockets.types';
-import { getAllCamerasNames, registerNewCamera } from '../services/cameras';
+import { EVENTS, EmitEvents, ListenEvents, SocketServer } from '../types/sockets.types';
+import { getAllCamerasNames, registerNewCamera } from './services/cameras.services';
 
 const handleCameraEvents = (io: SocketServer, socket: Socket<ListenEvents, EmitEvents>) => {
 	socket.on(EVENTS.NEW_CONNECTION, async (data) => {
