@@ -46,12 +46,13 @@ const ControlsSection = ({
 					</FormControl>
 					
 					<InputText
+						label="Password"
 						value={camPassword}
 						onChange={handleChangePassword}
 					/>
 					{/* Here */}
 
-					<Tooltip title="Only For Debugging">
+					<Tooltip title="Only For Testing Purposes">
 						<span>
 							<Button 
 								title="Fill Me"

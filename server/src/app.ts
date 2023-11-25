@@ -25,10 +25,6 @@ app.use((req, res) => {
 	});
 });
 
-// app.use((req, res, error) => {
-// 	console.log(error);
-// }); 
-
 redis.connect().catch(err => console.error('REDIS connection error', err));
 redis.DEL('cameras');
 

@@ -57,6 +57,7 @@ export interface PreviewProps {
 	stream?: MediaStream | null
 }
 export interface InputTextProps {
+	label: string
 	value: string;
 	onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
