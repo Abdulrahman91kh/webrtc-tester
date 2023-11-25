@@ -29,7 +29,7 @@ const getFinalRoute =(senders: RTCRtpSender[]) => {
 		senders.forEach(s => {
 			if(!s.transport) return;
 			const candidateTransport = s.transport.iceTransport;
-			const selectedPair = (candidateTransport as any).getSelectedCandidatePair();
+			const selectedPair = (candidateTransport as any).getSelectedCandidatePair(); // For somereasone typescript is complaining about this function is not found for RTCIceTransport but it is there so here is a work around
 			finalRoute = getCandidateType(selectedPair?.local?.candidate as string);
 			selectedCandidates = {
 				local: {

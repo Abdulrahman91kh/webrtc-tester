@@ -3,7 +3,7 @@ import SimplePeer from "simple-peer";
 import { Routes, SelectedCandidatesType, WebRTCStatus } from "../../types/Tester.type";
 import { AnswerType, CandidateGathering, ConnectPeerArgsType, OfferConnectionEmitType, SimplePeerTypePC } from "../../types/RTC.type";
 import { StunServers, TurnServers } from "./IceServers";
-import { getCandidateType, getGatheringState, getSelectedRoute } from "../Testers/Helpers/helper";
+import { getGatheringState, getSelectedRoute } from "../Testers/Helpers/helper";
 import socket from "../../config/Sockets/Sockets";
 import { EVENTS } from "../../types/Sockets.type";
 
@@ -30,10 +30,11 @@ const usePeerConnection = ( selectedCamera?: string ) => {
 		setStatus(gatheringState);
 	});
 
-	const handlingGeneratingOffer = (signal: SimplePeer.SignalData) => {
+	const handlingGeneratingOffer = (signal: SimplePeer.SignalData, password: string) => {
 		const offerData: OfferConnectionEmitType = {
 			name: selectedCamera as string,
 			signal,
+			password
 		};
 		socket.emit(EVENTS.OFFER_CONNECTION, offerData);
 		setStatus(WebRTCStatus.OFFER_SENT);
@@ -74,11 +75,15 @@ const usePeerConnection = ( selectedCamera?: string ) => {
 		alert("Something went wrong with the connection, try again");
 	};
 
-	const connectPeer = ({initiator, stream, testerId, offer }: ConnectPeerArgsType) => {
+	const connectPeer = ({initiator, stream, testerId, offer, password }: ConnectPeerArgsType) => {
 		setRemoteStream(null);
 		setCandidates([]);
 		if(!initiator && !testerId) {
 			alert("Should throw an error over sockets");
+			return;
+		}
+		else if(initiator && (password === "" || !password)) {
+			alert("Please provide the camera password to continue");
 			return;
 		}
 		const options: SimplePeer.Options = {
@@ -92,7 +97,6 @@ const usePeerConnection = ( selectedCamera?: string ) => {
 			}
 		};
 		if(!initiator) {
-			console.log(stream);
 			options["stream"] = stream;
 		}
 		setStatus(WebRTCStatus.CONNECTING);
@@ -101,15 +105,15 @@ const usePeerConnection = ( selectedCamera?: string ) => {
 			p._pc.addEventListener("icecandidate", handleNewCandidate);
 			p._pc.addEventListener("icegatheringstatechange", handleGatheringStateChange);
 			p.on("stream", handleGettingStream);
-			p.on("signal", handlingGeneratingOffer);
+			p.on("signal", (signal: SimplePeer.SignalData) => handlingGeneratingOffer(signal, password as string));
 		}
 		else {
 			p.signal(offer as SimplePeer.SignalData);
 			p.on("signal", (signal) => handleGeneratingAnswer(signal, testerId as string));
 		}
-		p.on("close", (event: any) => console.log("[Closing]", event));
+		p.on("close", (event: string) => console.log("[Closing]", event));
 		p.on("error", handleConnectionError);
-		p.on("end", (data: any) => console.log("[end]", data));
+		p.on("end", (data: string) => console.log("[end]", data));
 
 		peer.current = p;
 	};
@@ -121,7 +125,8 @@ const usePeerConnection = ( selectedCamera?: string ) => {
 		status,
 		remoteStream,
 		applySignal,
-		resultRoute
+		resultRoute,
+		selectedCandidates
 	};
 };
 

@@ -1,7 +1,6 @@
 import { SelectChangeEvent } from "@mui/material";
-import React from "react";
-import { WebRTCStatus } from "./Tester.type";
-import { ServersToConnect } from "./RTC.type";
+import React, { ChangeEvent } from "react";
+import { SelectedCandidatesType, WebRTCStatus } from "./Tester.type";
 
 export interface WrapperPropsType {
 	title: string;
@@ -16,8 +15,14 @@ export interface CameraSelectorPropsType {
 
 export interface ResultsPropsType {
 	route: string;
+	selectedCandidates: SelectedCandidatesType | undefined
 }
 
+export interface ErrorModalPropsType {
+	handleClose: () => void;
+	open: boolean;
+	message: string;
+}
 
 export interface VideoPlayerProps {
 	stream: MediaStream;
@@ -44,8 +49,14 @@ export interface ControlsSectionPropsType {
 	selectedCamera: string;
 	changeSelectedCamera: (event: SelectChangeEvent) => void;
 	connectToCamera: () => void;
+	camPassword: string;
+	setCamPassword: (password: string) => void;
 }
 
 export interface PreviewProps {
 	stream?: MediaStream | null
+}
+export interface InputTextProps {
+	value: string;
+	onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
