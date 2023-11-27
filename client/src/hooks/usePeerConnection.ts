@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import SimplePeer from "simple-peer";
-import { Routes, SelectedCandidatesType, WebRTCStatus } from "../../types/Tester.type";
-import { AnswerType, CandidateGathering, ConnectPeerArgsType, OfferConnectionEmitType, SimplePeerTypePC } from "../../types/RTC.type";
-import { StunServers, TurnServers } from "./IceServers";
-import { getGatheringState, getSelectedRoute } from "../Testers/Helpers/helper";
-import socket from "../../config/Sockets/Sockets";
-import { EVENTS } from "../../types/Sockets.type";
+import { Routes, SelectedCandidatesType, WebRTCStatus } from "../types/Tester.type";
+import { AnswerType, CandidateGathering, ConnectPeerArgsType, OfferConnectionEmitType, SimplePeerTypePC } from "../types/RTC.type";
+import { StunServers, TurnServers } from "../config/IceServers";
+import { getGatheringState, getSelectedRoute } from "../pages/Testers/Helpers/helper";
+import socket from "../config/Sockets/Sockets";
+import { EVENTS } from "../types/Sockets.type";
 
 
 

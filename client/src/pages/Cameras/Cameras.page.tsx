@@ -1,12 +1,12 @@
 import Wrapper from "../../containers/Wrapper/Wrapper";
 import Styles from "./Cameras.module.css";
-import useGetLocalStream from "../hooks/useGetLocalStream";
+import useGetLocalStream from "../../hooks/useGetLocalStream";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import { useEffect } from "react";
 import { getCameraCredentials } from "./Helpers/helpers";
 import socket from "../../config/Sockets/Sockets";
 import { EVENTS } from "../../types/Sockets.type";
-import usePeerConnection from "../hooks/usePeerConnection";
+import usePeerConnection from "../../hooks/usePeerConnection";
 
 const CamerasPage = () => {
 	const { localStream } = useGetLocalStream();

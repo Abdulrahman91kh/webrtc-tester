@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# WebRTC Tester - Frontend
+This code is the frontend of the WebRTC Tester app.
+- It is build in ReactJS (Typescript).
+- This service is using `socket.io-client` for backend communication and `simple-peer` as a main depen.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation & Setup
+- Client cannot be working alone, it needs a webserver to serve it. So we have two options, one is to run using the development and the other is to use a custom webserver like NodeJS HTTP server, or NGINX.
+1. First of all, let's grap the [https://github.com/Abdulrahman91kh/webrtc-tester](git repo). Use the following git command to clone the project
+2. Install the server dependancies.
+3. Build the typescript files (in case of not using the development server).
+4. Start the server (custom server or the development one).
+*The following commands are following these steps*
+```
+git clone https://github.com/Abdulrahman91kh/webrtc-tester.git
+cd client && yarn install
+```
+- The following command would only be used in case of not using the development server
+```
+yarn run build
+```
+- The following command would only be used in case of using the development server
+```
+yarn start
+```
+  *Note:* You will need to have git installed as prerequisite for this step. For more info please check [https://docs.github.com/en/get-started](Github)
 
-## Available Scripts
+## How it is implemented?
+- This service is using functional programing approach, while focusing on three main aspects (testability, error handling and separation of concerns).
+### Folder Structure
+| Folder | Role |
+| ----- | ----- |
+| componenets | which includes the common components that are shared between all pages.|
+| config | main objects, instances that would be used more than once in the app such as `socket`, `BACKEND_ENDPOINT`. |
+| containers | includes the common containers that are shared between all pages such as main layout. |
+| hooks | includes the custom hooks for getting local-stream and WebRTC stuff used for cameras logic and tester logic as well. |
+| pages | using `react-dom-router` we have two different pages, one holding the camera and the other for tester logic. |
+| types | include all the interfaces and types of arguments and data used in the code |
+| nginx.conf | this file is there for dockerizing the frontent, docker will use it as config for the webserver to serve all the routes of the app. |
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Next improvements
+1. 1. Simple Peer better error handling (Cleaning up and providing more insights about the reason behind the error).
+2. Cleanup after having a sockets error.
+3. Cleanup after disconnecting.
+4. Send errors that happen on the camera frontend side over sockets.
+4. Enhance the the frontend preformance.
+5. Introduce E2E testing.
