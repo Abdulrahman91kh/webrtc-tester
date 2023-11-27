@@ -3,15 +3,9 @@ import { Server, Socket } from "socket.io";
 import handleCameraEvents from "./handleCameraEvents";
 import { deleteCamera } from "../storage/cameras";
 import handleTesterEvents from "./handleTesterEvent";
-import { EmitEvents,  ErrorHandlerArgsType,  ListenEvents, } from "../types/sockets.types";
+import { EVENTS, EmitEvents,  ErrorHandlerArgsType,  ListenEvents, SocketServer, } from "../types/sockets.types";
+import { getAllCamerasNames } from "../services/cameras.services";
 
-
-
-const handleSocketClose = (socket: Socket) => {
-	socket.conn.on('close', async () => {
-		await deleteCamera(socket.id);
-	});
-};
 
 const eventsErrorHandler = ({
 	io, socket, fn
@@ -24,7 +18,26 @@ const eventsErrorHandler = ({
 	}
 };
 
+const handleSocketClose = (io: SocketServer, socket: Socket) => {
+	socket.conn.on('close', async () => {
+		
+		eventsErrorHandler({
+			io,
+			socket,
+			fn: async () => {
+
+				await deleteCamera(socket.id);
+				const names = await getAllCamerasNames();
+				io.emit(EVENTS.GET_CAMERAS_RES, names);
+				
+			}
+		});
+
+	});
+};
+
 const connectSocket = (server: HttpServer) => {
+	
 	const io = new Server<ListenEvents, EmitEvents>(server, {
 		cors: { origin: "*" },
 		connectionStateRecovery: {
@@ -33,17 +46,21 @@ const connectSocket = (server: HttpServer) => {
 	});
 
 	io.on("connection", (socket) => {
+		
 		eventsErrorHandler({
 			io,
 			socket,
 			fn: handleCameraEvents
 		});
+
 		eventsErrorHandler({
 			io,
 			socket,
 			fn: handleTesterEvents
 		});
-		handleSocketClose(socket);
+
+		handleSocketClose(io, socket);
+		
 	});
 };
 

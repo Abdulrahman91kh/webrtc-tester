@@ -1,6 +1,6 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import Button from "../../../components/Button/Button";
-import { ErrorModalPropsType } from "../../../types/ComponentsProps.type";
+import Button from "../Button/Button";
+import { ErrorModalPropsType } from "../../types/ComponentsProps.type";
 
 const ErrorModal = ({
 	open,

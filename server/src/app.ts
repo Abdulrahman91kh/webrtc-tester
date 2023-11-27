@@ -3,7 +3,6 @@ import DotEnv from 'dotenv';
 import connectSocket from './sockets';
 import redis from './config/redis';
 import path from 'path';
-import fs from 'fs/promises'
 
 DotEnv.config();
 const app = express();
@@ -26,9 +25,8 @@ app.use((req, res) => {
 });
 
 redis.connect().catch(err => console.error('REDIS connection error', err));
-redis.DEL('cameras');
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || "3001", () => {
 	console.log(`Server is up and running on port ${process.env.PORT}`);
 	connectSocket(server);
 });

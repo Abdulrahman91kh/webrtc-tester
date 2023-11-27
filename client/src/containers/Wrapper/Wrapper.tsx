@@ -4,7 +4,7 @@ import { WrapperPropsType } from "../../types/ComponentsProps.type";
 import Styles from "./Wrapper.module.css";
 import socket from "../../config/Sockets/Sockets";
 import { EVENTS } from "../../types/Sockets.type";
-import ErrorModal from "./components/ErrorModal";
+import ErrorModal from "../../components/ErrorModal/ErrorModal";
 
 const Wrapper = ({title, children}: WrapperPropsType) => {
 

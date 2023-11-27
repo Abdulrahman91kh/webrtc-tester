@@ -8,7 +8,7 @@ import { SelectChangeEvent } from "@mui/material";
 import Analysis from "./components/Analysis/Analysis";
 import socket from "../../config/Sockets/Sockets";
 import { EVENTS } from "../../types/Sockets.type";
-import usePeerConnection from "../hooks/usePeerConnection";
+import usePeerConnection from "../../hooks/usePeerConnection";
 import SimplePeer from "simple-peer";
 import { WebRTCStatus } from "../../types/Tester.type";
 
