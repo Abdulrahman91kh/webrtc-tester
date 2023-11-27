@@ -38,7 +38,7 @@ yarn start
 | nginx.conf | this file is there for dockerizing the frontent, docker will use it as config for the webserver to serve all the routes of the app. |
 
 ### Next improvements
-1. 1. Simple Peer better error handling (Cleaning up and providing more insights about the reason behind the error).
+1. Simple Peer better error handling (Cleaning up and providing more insights about the reason behind the error).
 2. Cleanup after having a sockets error.
 3. Cleanup after disconnecting.
 4. Send errors that happen on the camera frontend side over sockets.

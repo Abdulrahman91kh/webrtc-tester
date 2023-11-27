@@ -2,7 +2,7 @@
 Introduction
 This app is build to test & analysis P2P connections using WebRTC. It shows all the Interactive Connection Establishment candidates, the selected pair and the route that was choosen for the P2P connection whether it is (Local, STUN, TURN, None of the previous options).
 
-Since the WebRTC is happening at the client side, and it would require only a signaling backend, this project is leaning more towards Fronend development.
+Since the WebRTC is happening at the client side, and it would require only a signaling backend, this project is leaning more towards Frontend development.
 
 ## Installation & Setup
 1. First of all, let's grap the [https://github.com/Abdulrahman91kh/webrtc-tester](git repo). Use the following git command to clone the project
@@ -11,7 +11,7 @@ git clone https://github.com/Abdulrahman91kh/webrtc-tester.git
 ```
   *Note:* You will need to have git installed as prerequisite for this step. For more info please check [https://docs.github.com/en/get-started](Github)
 
-2. Now you need to navigate to the project root folder and install start your docker containers, you can do it using: 
+2. Now you need to navigate to the project root folder and build start your docker containers, you can do it using: 
 ```
 docker compose up
 ```
