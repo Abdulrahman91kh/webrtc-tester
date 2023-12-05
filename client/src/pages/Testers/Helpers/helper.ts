@@ -4,9 +4,9 @@ import { FinalRouteType, Routes, SelectedCandidatesType } from "../../../types/T
 export const getCandidateType = (candidate: string): Routes => {
 	if(candidate.includes("typ host")) 
 		return Routes.Local;
-	if(candidate.includes("typ srflx") || candidate.includes("typ prflx"))
+	if( ["typ srflx", "typ prflx", "stun"].some(condition => candidate.includes(condition)) )
 		return Routes.STUN;
-	if(candidate.includes("typ relay"))
+	if(candidate.includes("typ relay") || candidate.includes("turn"))
 		return Routes.TURN;
 	return Routes.UNKNOWN;
 };
