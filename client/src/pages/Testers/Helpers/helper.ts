@@ -2,7 +2,7 @@ import { CandidateGathering } from "../../../types/RTC.type";
 import { FinalRouteType, Routes, SelectedCandidatesType } from "../../../types/Tester.type";
 
 export const getCandidateType = (candidate: string): Routes => {
-	if(candidate.includes("typ host")) 
+	if(candidate.includes("typ host") || candidate.includes("local")) 
 		return Routes.Local;
 	if( ["typ srflx", "typ prflx", "stun"].some(condition => candidate.includes(condition)) )
 		return Routes.STUN;
