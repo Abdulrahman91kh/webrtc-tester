@@ -8,6 +8,7 @@ DotEnv.config();
 const app = express();
 
 app.use("/", express.static(path.join(__dirname, "./public/")));
+app.use("/cameras", express.static(path.join(__dirname, "./public/")));
 
 app.get('/ping', (req, res) => {
 	res.status(200).json({
@@ -27,6 +28,6 @@ app.use((req, res) => {
 redis.connect().catch(err => console.error('REDIS connection error', err));
 
 const server = app.listen(process.env.PORT || "3001", () => {
-	console.log(`Server is up and running on port ${process.env.PORT}`);
+	console.log(`Server is up and running on port ${process.env.PORT || "3001"}`);
 	connectSocket(server);
 });
